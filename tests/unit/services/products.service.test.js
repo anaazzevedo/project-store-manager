@@ -1,17 +1,15 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
 const productsModel = require('../../../src/models/products.model');
-const { getAllProducts, getProductId, postProduct } = require('../../../src/services/products.service');
-
-const connection = require('../../../src/models/connection');
-const mockModels = require('./mockModels');
+const { getProductId, getAllProducts } = require('../../../src/services/products.service');
+const mockModels = require('../models/mockModels');
 
 describe('Testes de unidade da camada Service de produtos', function () {
   it('Testa se retorna todos os produtos', async function () {
 
     sinon.stub(productsModel, 'findAllProducts').resolves(mockModels.allProductsResponse);
 
-    const result = await  productsModel.findAllProducts();
+    const result = await getAllProducts();
 
     expect(result).to.deep.equal(mockModels.allProductsResponse);
   });
@@ -20,12 +18,14 @@ describe('Testes de unidade da camada Service de produtos', function () {
 
     sinon.stub(productsModel, 'findByProductId').resolves(mockModels.allProductsResponse[0]);
 
-    const result = await productsModel.findByProductId();
+    const result = await getProductId(1);
 
     expect(result).to.deep.equal(mockModels.allProductsResponse[0]);
   });
 
-  it('Testa retorno invalido', async function () {
+  it('Testa retorno inválido', async function () {
+    sinon.stub(productsModel, 'findByProductId').resolves(undefined);
+
     const idInvalid = 390423;
 
     try {
