@@ -26,5 +26,24 @@
     "headers": [],
     "params": [],
     "tests": []
+  },
+  {
+    "_id": "876a1383-9820-46b9-9e83-64b76605eb5e",
+    "colId": "history",
+    "containerId": "",
+    "name": "localhost:3001/products",
+    "url": "localhost:3001/products",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-03-27T21:44:58.860Z",
+    "modified": "2023-03-27T22:12:13.565Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{ \"name\": \"boljuya\" }",
+      "form": []
+    },
+    "tests": []
   }
 ]
