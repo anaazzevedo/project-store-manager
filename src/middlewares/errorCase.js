@@ -4,4 +4,8 @@ const errorCase = (error, _req, res, _next) => {
   return res.status(500).json({ message: error.message });
 };
 
-module.exports = errorCase;
+const typesErros = { NOT_FOUND: 404, NAME_IS_REQUIRED: 400, INVALID_VALUE: 422 };
+
+const targetError = (type) => typesErros[type] || 500;
+
+module.exports = { errorCase, targetError };

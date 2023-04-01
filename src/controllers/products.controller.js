@@ -20,13 +20,13 @@ const getProductId = async (req, res, next) => {
 };
 
 const postProduct = async (req, res) => {
-    const { name } = req.body;
+  const { name } = req.body;
   const { message, type } = await productsService.postProduct(name);
   
-    if (type === 'INVALID_NAME') return res.status(400).json({ message });
-    if (type === 'INVALID_LENGTH') return res.status(422).json({ message });
+  if (type === 'INVALID_NAME') return res.status(400).json({ message });
+  if (type === 'INVALID_LENGTH') return res.status(422).json({ message });
   
-    return res.status(201).json(message);
+  return res.status(201).json(message);
 };
 
 module.exports = { getAllProducts, getProductId, postProduct };
