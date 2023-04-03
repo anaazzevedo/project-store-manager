@@ -26,4 +26,14 @@ const postProduct = async (name) => {
   return { type: null, message: getNewProduct };
 };
 
-module.exports = { getAllProducts, getProductId, postProduct };
+const updateProductId = async (id, name) => {
+  const error = await validates.validateName(name);
+  if (error.type) return error;
+  
+  const affectedRows = await productsModel.updateProductId(id, name);
+  if (affectedRows === 0) return { type: 'NOT_FOUND', message: 'Product not found' };
+
+  return { message: name, type: null };
+};
+
+module.exports = { getAllProducts, getProductId, postProduct, updateProductId };
