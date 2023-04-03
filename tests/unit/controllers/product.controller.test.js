@@ -46,5 +46,21 @@ describe('Testes de unidade da camada Controller de sales', function () {
 
     sinon.restore()
   })
+
+  it('Testa se retorna sale pelo id', async function () {
+    const res = {};
+    const req = { params: { id: 1 }};
+
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    sinon.stub(serviceSales, 'listSaleId').resolves(mockSales.allSalesResponse);
+    await controllerSales.listSaleId(req, res);
+
+    expect(res.status).to.have.been.calledWith(200);
+    expect(res.json).to.have.been.calledWith(mockSales.allSalesResponse);
+
+    sinon.restore()
+  })
 })
 
