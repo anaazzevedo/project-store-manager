@@ -23,6 +23,7 @@ const listSaleId = async (req, res, next) => {
   try {
     const { id } = req.params;
     const result = await salesService.listSaleId(id);
+    
     return res.status(200).json(result);
   } catch (err) {
     next(err);

@@ -1,10 +1,7 @@
 const { expect } = require('chai');
 const serviceProducts = require('../../../src/services/products.service');
-const serviceSales = require('../../../src/services/sales.service');
 const controllerProducts = require('../../../src/controllers/products.controller');
-const controllerSales = require('../../../src/controllers/sales.controller');
 const mockModels = require('../models/mockModels')
-const mockSales = require('./mockSales');
 const sinon = require('sinon');
 
 const chai = require('chai')
@@ -28,39 +25,20 @@ describe('Testes de unidade da camada Controller de produtos', function () {
 
     sinon.restore()
   })
-})
 
-describe('Testes de unidade da camada Controller de sales', function () {
-  it('Testa se retorna status 200', async function () {
+  it('Testa se retorna product pelo id', async function () {
     const res = {};
-    const req = {};
+    const req = { params: { id: 1 } };
 
     res.status = sinon.stub().returns(res);
     res.json = sinon.stub().returns();
 
-    sinon.stub(serviceSales, 'listAllSales').resolves(mockSales.allSalesResponse);
-    await controllerSales.listAllSales(req, res);
+    sinon.stub(serviceProducts, 'getProductId').resolves(mockModels.allProductsResponse);
+    await controllerProducts.getProductId(req, res);
 
     expect(res.status).to.have.been.calledWith(200);
-    expect(res.json).to.have.been.calledWith(mockSales.allSalesResponse);
-
-    sinon.restore()
-  })
-
-  it('Testa se retorna sale pelo id', async function () {
-    const res = {};
-    const req = { params: { id: 1 }};
-
-    res.status = sinon.stub().returns(res);
-    res.json = sinon.stub().returns();
-
-    sinon.stub(serviceSales, 'listSaleId').resolves(mockSales.allSalesResponse);
-    await controllerSales.listSaleId(req, res);
-
-    expect(res.status).to.have.been.calledWith(200);
-    expect(res.json).to.have.been.calledWith(mockSales.allSalesResponse);
+    expect(res.json).to.have.been.calledWith(mockModels.allProductsResponse);
 
     sinon.restore()
   })
 })
-

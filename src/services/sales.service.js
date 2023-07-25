@@ -34,6 +34,9 @@ const listAllSales = async () => {
 
 const listSaleId = async (id) => {
   const result = await salesModel.listSaleId(id);
+  if (!result) {
+    throw err(404, 'Sale not found');
+  }
   if (result.length === 0) {
     throw err(404, 'Sale not found');
   }
